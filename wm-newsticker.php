@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: WM Newsticker
- * Plugin URI: https://github.com/ArnoldWender/wm-newsticker
+ * Plugin URI: https://github.com/arnoldwender/wm-newsticker
  * Description: A Gutenberg block for animated news tickers with scroll, fade, slide and typing animations.
  * Version: 1.4.4
  * Author: Arnold Wender
