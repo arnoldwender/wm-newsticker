@@ -1,0 +1,440 @@
+# German translation for WM Newsticker
+# Copyright (C) 2024 Wender Media
+# This file is distributed under the GPL v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: WM Newsticker 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wender.media\n"
+"POT-Creation-Date: 2024-01-01T00:00:00+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2024-01-01T00:00:00+00:00\n"
+"Last-Translator: Wender Media\n"
+"Language-Team: German\n"
+"Language: de_DE\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: src/index.js
+msgid "Newsticker"
+msgstr "Newsticker"
+
+#: src/index.js
+msgid "Displays announcements in a ticker format with customizable links."
+msgstr "Zeigt Ankündigungen im Ticker-Format mit anpassbaren Links an."
+
+#: src/index.js
+msgid "news"
+msgstr "Nachrichten"
+
+#: src/index.js
+msgid "ticker"
+msgstr "Ticker"
+
+#: src/index.js
+msgid "announcements"
+msgstr "Ankündigungen"
+
+#: src/index.js
+msgid "General Settings"
+msgstr "Allgemeine Einstellungen"
+
+#: src/index.js
+msgid "Label text"
+msgstr "Label-Text"
+
+#: src/index.js
+msgid "Leave empty to hide the label"
+msgstr "Leer lassen, um das Label auszublenden"
+
+#: src/index.js
+msgid "Separator"
+msgstr "Trennzeichen"
+
+#: src/index.js
+msgid "Speed"
+msgstr "Geschwindigkeit"
+
+#: src/index.js
+msgid "Higher value = faster"
+msgstr "Höherer Wert = schneller"
+
+#: src/index.js
+msgid "Font size (px)"
+msgstr "Schriftgröße (px)"
+
+#: src/index.js
+msgid "Height (px)"
+msgstr "Höhe (px)"
+
+#: src/index.js
+msgid "Pause on hover"
+msgstr "Bei Mauszeiger pausieren"
+
+#: src/index.js
+msgid "Colors"
+msgstr "Farben"
+
+#: src/index.js
+msgid "Ticker background"
+msgstr "Ticker-Hintergrund"
+
+#: src/index.js
+msgid "Text color"
+msgstr "Textfarbe"
+
+#: src/index.js
+msgid "Label background"
+msgstr "Label-Hintergrund"
+
+#: src/index.js
+msgid "Label text color"
+msgstr "Label-Textfarbe"
+
+#: src/index.js
+msgid "Announcements"
+msgstr "Ankündigungen"
+
+#: src/index.js
+msgid "Announcement text"
+msgstr "Ankündigungstext"
+
+#: src/index.js
+msgid "Link (optional)"
+msgstr "Link (optional)"
+
+#: src/index.js
+msgid "Open in new tab"
+msgstr "In neuem Tab öffnen"
+
+#: src/index.js
+msgid "Move up"
+msgstr "Nach oben"
+
+#: src/index.js
+msgid "Move down"
+msgstr "Nach unten"
+
+#: src/index.js
+msgid "Delete"
+msgstr "Löschen"
+
+#: src/index.js
+msgid "Add announcement"
+msgstr "Ankündigung hinzufügen"
+
+#: src/index.js
+msgid "Add announcements in the sidebar →"
+msgstr "Fügen Sie Ankündigungen in der Seitenleiste hinzu →"
+
+#: src/index.js
+msgid "(No text)"
+msgstr "(Kein Text)"
+
+#: src/index.js
+msgid "NEWS"
+msgstr "AKTUELL"
+
+#: src/index.js
+msgid "About"
+msgstr "Über"
+
+#: src/index.js
+msgid "Developed by"
+msgstr "Entwickelt von"
+
+#: src/index.js
+msgid "Animation"
+msgstr "Animation"
+
+#: src/index.js
+msgid "Animation type"
+msgstr "Animationstyp"
+
+#: src/index.js
+msgid "Choose how announcements are displayed"
+msgstr "Wählen Sie, wie Ankündigungen angezeigt werden"
+
+#: src/index.js
+msgid "Scroll (Marquee)"
+msgstr "Scrollen (Laufschrift)"
+
+#: src/index.js
+msgid "Fade"
+msgstr "Einblenden"
+
+#: src/index.js
+msgid "Slide"
+msgstr "Gleiten"
+
+#: src/index.js
+msgid "Typing"
+msgstr "Tippen"
+
+#: src/index.js
+msgid "Direction"
+msgstr "Richtung"
+
+#: src/index.js
+msgid "Left"
+msgstr "Links"
+
+#: src/index.js
+msgid "Right"
+msgstr "Rechts"
+
+#: src/index.js
+msgid "Up"
+msgstr "Oben"
+
+#: src/index.js
+msgid "Down"
+msgstr "Unten"
+
+#: src/index.js
+msgid "RTL (Right-to-Left)"
+msgstr "RTL (Rechts-nach-Links)"
+
+#: src/index.js
+msgid "Enable for Arabic, Hebrew, etc."
+msgstr "Aktivieren für Arabisch, Hebräisch, etc."
+
+#: src/index.js
+msgid "Controls"
+msgstr "Steuerung"
+
+#: src/index.js
+msgid "Show controls"
+msgstr "Steuerung anzeigen"
+
+#: src/index.js
+msgid "Display Play/Pause and Prev/Next buttons"
+msgstr "Play/Pause und Vor/Zurück-Tasten anzeigen"
+
+#: src/index.js
+msgid "Controls position"
+msgstr "Position der Steuerung"
+
+#: src/index.js
+msgid "Play/Pause button"
+msgstr "Play/Pause-Taste"
+
+#: src/index.js
+msgid "Previous/Next buttons"
+msgstr "Vor/Zurück-Tasten"
+
+#: src/index.js
+msgid "Only works with Fade/Slide/Typing animations"
+msgstr "Funktioniert nur mit Einblend-/Gleit-/Tipp-Animationen"
+
+#: src/index.js
+msgid "Progress indicator"
+msgstr "Fortschrittsanzeige"
+
+#: src/index.js
+msgid "Shows a progress bar at the bottom"
+msgstr "Zeigt eine Fortschrittsleiste am unteren Rand"
+
+#: wm-newsticker.php
+msgid "Previous"
+msgstr "Zurück"
+
+#: wm-newsticker.php
+msgid "Next"
+msgstr "Weiter"
+
+#: wm-newsticker.php
+msgid "Play/Pause"
+msgstr "Play/Pause"
+
+#: src/index.js
+msgid "Content Source"
+msgstr "Inhaltsquelle"
+
+#: src/index.js
+msgid "Source"
+msgstr "Quelle"
+
+#: src/index.js
+msgid "Manual announcements"
+msgstr "Manuelle Ankündigungen"
+
+#: src/index.js
+msgid "Recent posts"
+msgstr "Aktuelle Beiträge"
+
+#: src/index.js
+msgid "Post type"
+msgstr "Beitragstyp"
+
+#: src/index.js
+msgid "Number of posts"
+msgstr "Anzahl der Beiträge"
+
+#: src/index.js
+msgid "Filter by category"
+msgstr "Nach Kategorie filtern"
+
+#: src/index.js
+msgid "All categories"
+msgstr "Alle Kategorien"
+
+#: src/index.js
+msgid "Select a category to filter posts"
+msgstr "Wählen Sie eine Kategorie zum Filtern"
+
+#: src/index.js
+msgid "Filter by tag"
+msgstr "Nach Schlagwort filtern"
+
+#: src/index.js
+msgid "All tags"
+msgstr "Alle Schlagwörter"
+
+#: src/index.js
+msgid "Order by"
+msgstr "Sortieren nach"
+
+#: src/index.js
+msgid "Date"
+msgstr "Datum"
+
+#: src/index.js
+msgid "Title"
+msgstr "Titel"
+
+#: src/index.js
+msgid "Last modified"
+msgstr "Zuletzt geändert"
+
+#: src/index.js
+msgid "Random"
+msgstr "Zufällig"
+
+#: src/index.js
+msgid "Comment count"
+msgstr "Kommentaranzahl"
+
+#: src/index.js
+msgid "Order"
+msgstr "Reihenfolge"
+
+#: src/index.js
+msgid "Descending (newest first)"
+msgstr "Absteigend (neueste zuerst)"
+
+#: src/index.js
+msgid "Ascending (oldest first)"
+msgstr "Aufsteigend (älteste zuerst)"
+
+#: src/index.js
+msgid "Show date"
+msgstr "Datum anzeigen"
+
+#: src/index.js
+msgid "Date format"
+msgstr "Datumsformat"
+
+#: src/index.js
+msgid "Relative (e.g., 2 hours ago)"
+msgstr "Relativ (z.B. vor 2 Stunden)"
+
+#: src/index.js
+msgid "Absolute (site format)"
+msgstr "Absolut (Website-Format)"
+
+#: src/index.js
+msgid "Loading posts..."
+msgstr "Beiträge werden geladen..."
+
+#: src/index.js
+msgid "Preview:"
+msgstr "Vorschau:"
+
+#: src/index.js
+msgid "posts found"
+msgstr "Beiträge gefunden"
+
+#: src/index.js
+msgid "No posts found with current filters"
+msgstr "Keine Beiträge mit aktuellen Filtern gefunden"
+
+#: src/index.js
+msgid "No posts found"
+msgstr "Keine Beiträge gefunden"
+
+#: src/index.js
+msgid "Loading..."
+msgstr "Laden..."
+
+#: wm-newsticker.php
+msgid "ago"
+msgstr "vor"
+
+#: src/index.js
+msgid "Spacing & Borders"
+msgstr "Abstände & Rahmen"
+
+#: src/index.js
+msgid "Padding"
+msgstr "Innenabstand"
+
+#: src/index.js
+msgid "Margin"
+msgstr "Außenabstand"
+
+#: src/index.js
+msgid "Border Radius"
+msgstr "Eckenradius"
+
+#: src/index.js
+msgid "Border Width"
+msgstr "Rahmenbreite"
+
+#: src/index.js
+msgid "Border Style"
+msgstr "Rahmenstil"
+
+#: src/index.js
+msgid "Solid"
+msgstr "Durchgezogen"
+
+#: src/index.js
+msgid "Dashed"
+msgstr "Gestrichelt"
+
+#: src/index.js
+msgid "Dotted"
+msgstr "Gepunktet"
+
+#: src/index.js
+msgid "None"
+msgstr "Keiner"
+
+#: src/index.js
+msgid "Box Shadow"
+msgstr "Schatten"
+
+#: src/index.js
+msgid "Small"
+msgstr "Klein"
+
+#: src/index.js
+msgid "Medium"
+msgstr "Mittel"
+
+#: src/index.js
+msgid "Large"
+msgstr "Groß"
+
+#: src/index.js
+msgid "Inset"
+msgstr "Eingesetzt"
+
+#: src/index.js
+msgid "Border color"
+msgstr "Rahmenfarbe"
+
+#: src/index.js
+msgid "Label text"
+msgstr "Label-Textfarbe"

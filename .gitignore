@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Build artifacts (keep build/ for distribution)
+# build/
+
+# Lock files
+package-lock.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.sublime-*
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment
+.env
+.env.local
+
+# WordPress
+*.sql
+*.sql.gz

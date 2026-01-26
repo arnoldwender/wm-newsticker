@@ -1,0 +1,18 @@
+{
+    "name": "wm-newsticker",
+    "version": "1.0.0",
+    "description": "Bloque de Gutenberg para mostrar anuncios en formato ticker",
+    "author": "Wender Media",
+    "license": "GPL-2.0-or-later",
+    "main": "build/index.js",
+    "scripts": {
+        "build": "wp-scripts build",
+        "start": "wp-scripts start",
+        "format": "wp-scripts format",
+        "lint:css": "wp-scripts lint-style",
+        "lint:js": "wp-scripts lint-js"
+    },
+    "devDependencies": {
+        "@wordpress/scripts": "^27.0.0"
+    }
+}

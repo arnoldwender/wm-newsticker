@@ -1,0 +1,133 @@
+# Copyright (C) 2024 Wender Media
+# This file is distributed under the GPL v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: WM Newsticker 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wender.media\n"
+"POT-Creation-Date: 2024-01-01T00:00:00+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2024-01-01T00:00:00+00:00\n"
+"Last-Translator: Wender Media\n"
+"Language-Team: Wender Media\n"
+
+#: src/index.js
+msgid "Newsticker"
+msgstr ""
+
+#: src/index.js
+msgid "Displays announcements in a ticker format with customizable links."
+msgstr ""
+
+#: src/index.js
+msgid "news"
+msgstr ""
+
+#: src/index.js
+msgid "ticker"
+msgstr ""
+
+#: src/index.js
+msgid "announcements"
+msgstr ""
+
+#: src/index.js
+msgid "General Settings"
+msgstr ""
+
+#: src/index.js
+msgid "Label text"
+msgstr ""
+
+#: src/index.js
+msgid "Leave empty to hide the label"
+msgstr ""
+
+#: src/index.js
+msgid "Separator"
+msgstr ""
+
+#: src/index.js
+msgid "Speed"
+msgstr ""
+
+#: src/index.js
+msgid "Higher value = faster"
+msgstr ""
+
+#: src/index.js
+msgid "Font size (px)"
+msgstr ""
+
+#: src/index.js
+msgid "Height (px)"
+msgstr ""
+
+#: src/index.js
+msgid "Pause on hover"
+msgstr ""
+
+#: src/index.js
+msgid "Colors"
+msgstr ""
+
+#: src/index.js
+msgid "Ticker background"
+msgstr ""
+
+#: src/index.js
+msgid "Text color"
+msgstr ""
+
+#: src/index.js
+msgid "Label background"
+msgstr ""
+
+#: src/index.js
+msgid "Label text color"
+msgstr ""
+
+#: src/index.js
+msgid "Announcements"
+msgstr ""
+
+#: src/index.js
+msgid "Announcement text"
+msgstr ""
+
+#: src/index.js
+msgid "Link (optional)"
+msgstr ""
+
+#: src/index.js
+msgid "Open in new tab"
+msgstr ""
+
+#: src/index.js
+msgid "Move up"
+msgstr ""
+
+#: src/index.js
+msgid "Move down"
+msgstr ""
+
+#: src/index.js
+msgid "Delete"
+msgstr ""
+
+#: src/index.js
+msgid "Add announcement"
+msgstr ""
+
+#: src/index.js
+msgid "Add announcements in the sidebar →"
+msgstr ""
+
+#: src/index.js
+msgid "(No text)"
+msgstr ""
+
+#: src/index.js
+msgid "NEWS"
+msgstr ""
