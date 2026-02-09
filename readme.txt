@@ -3,7 +3,7 @@ Contributors: arnoldwender
 Tags: news ticker, marquee, announcements, breaking news, gutenberg block
 Requires at least: 5.8
 Tested up to: 6.9
-Stable tag: 1.4.4
+Stable tag: 1.4.6
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -54,7 +54,7 @@ A Gutenberg block for creating animated news tickers. Supports multiple animatio
 * Translation-ready for additional languages
 * Compatible with WPML and Polylang
 
-= 🎯 Perfect For =
+= Perfect For =
 
 * Breaking news and alerts
 * Stock tickers and financial updates
@@ -65,7 +65,7 @@ A Gutenberg block for creating animated news tickers. Supports multiple animatio
 * Company announcements
 * Emergency notifications
 
-= 🚀 Performance =
+= Performance =
 
 * Lightweight (~3KB CSS, ~1KB JS per ticker)
 * No jQuery dependency
@@ -73,7 +73,7 @@ A Gutenberg block for creating animated news tickers. Supports multiple animatio
 * No external API calls
 * Server-side rendering
 
-= 🔒 Security =
+= Security =
 
 * All inputs properly sanitized and escaped
 * No database queries (uses WordPress APIs)
@@ -144,6 +144,24 @@ Yes, when using posts as the content source, you can filter by a specific catego
 
 == Changelog ==
 
+= 1.4.6 =
+* Added block.json metadata file for modern block registration
+* Moved frontend JavaScript to separate enqueued file (replaces inline scripts)
+* Added prefers-reduced-motion CSS support for accessibility
+* Added ARIA attributes (role, aria-label, aria-live) for screen readers
+* Added aria-hidden and focusable attributes to SVG icons
+* Fixed deprecated current_time() usage
+* Fixed label visibility bug (empty label now correctly hidden on frontend)
+* Fixed version mismatch in editor panel
+* Removed unused PanelColorSettings import
+* Removed font-family override to respect theme fonts
+* Removed unnecessary CSS !important declarations
+* Translated all code comments to English
+
+= 1.4.5 =
+* Added source code and build instructions for WordPress.org compliance
+* Included /src/ folder with human-readable source files
+
 = 1.4.4 =
 * Cleaned up promotional content
 * Updated author information
@@ -205,6 +223,31 @@ Major update with full spacing and border customization. Redesigned color contro
 
 = 1.3.0 =
 New dynamic content feature! Display your latest posts automatically in the ticker.
+
+== Development / Source Code ==
+
+The unminified source files for the compiled assets in `/build/` are included in this plugin under `/src/`.
+
+Source repository: https://github.com/arnoldwender/wm-newsticker
+
+= Build Instructions =
+
+1. `npm install`
+2. `npm run build`
+
+This generates:
+
+* `build/index.js` - Compiled editor script
+* `build/index.css` - Compiled editor styles
+* `build/style-index.css` - Compiled frontend styles
+
+= Source Files =
+
+* `src/index.js` - Block editor component (React/JSX)
+* `src/editor.scss` - Editor styles (SCSS)
+* `src/style.scss` - Frontend styles (SCSS)
+
+The build uses `@wordpress/scripts` which handles Webpack, Babel, and PostCSS configuration.
 
 == Additional Information ==
 
