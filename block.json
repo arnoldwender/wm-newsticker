@@ -1,0 +1,177 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wm/newsticker",
+	"version": "1.4.6",
+	"title": "Newsticker",
+	"category": "widgets",
+	"icon": "megaphone",
+	"description": "Displays announcements in a ticker format with customizable links.",
+	"keywords": [ "news", "ticker", "announcements" ],
+	"supports": {
+		"html": false,
+		"align": [ "wide", "full" ]
+	},
+	"textdomain": "wm-newsticker",
+	"editorScript": "file:./build/index.js",
+	"editorStyle": "file:./build/index.css",
+	"style": "file:./build/style-index.css",
+	"viewScript": "file:./build/frontend.js",
+	"attributes": {
+		"items": {
+			"type": "array",
+			"default": []
+		},
+		"speed": {
+			"type": "number",
+			"default": 50
+		},
+		"pauseOnHover": {
+			"type": "boolean",
+			"default": true
+		},
+		"backgroundColor": {
+			"type": "string",
+			"default": "#1a1a2e"
+		},
+		"textColor": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"labelText": {
+			"type": "string",
+			"default": ""
+		},
+		"labelBackgroundColor": {
+			"type": "string",
+			"default": "#e94560"
+		},
+		"labelTextColor": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"separator": {
+			"type": "string",
+			"default": "•"
+		},
+		"fontSize": {
+			"type": "number",
+			"default": 14
+		},
+		"height": {
+			"type": "number",
+			"default": 45
+		},
+		"animationType": {
+			"type": "string",
+			"default": "scroll"
+		},
+		"direction": {
+			"type": "string",
+			"default": "left"
+		},
+		"isRTL": {
+			"type": "boolean",
+			"default": false
+		},
+		"showControls": {
+			"type": "boolean",
+			"default": false
+		},
+		"showPlayPause": {
+			"type": "boolean",
+			"default": true
+		},
+		"showPrevNext": {
+			"type": "boolean",
+			"default": true
+		},
+		"showProgress": {
+			"type": "boolean",
+			"default": false
+		},
+		"controlsPosition": {
+			"type": "string",
+			"default": "right"
+		},
+		"contentSource": {
+			"type": "string",
+			"default": "manual"
+		},
+		"postType": {
+			"type": "string",
+			"default": "post"
+		},
+		"postsCount": {
+			"type": "number",
+			"default": 5
+		},
+		"categoryIds": {
+			"type": "array",
+			"default": []
+		},
+		"tagIds": {
+			"type": "array",
+			"default": []
+		},
+		"orderBy": {
+			"type": "string",
+			"default": "date"
+		},
+		"order": {
+			"type": "string",
+			"default": "DESC"
+		},
+		"showDate": {
+			"type": "boolean",
+			"default": false
+		},
+		"dateFormat": {
+			"type": "string",
+			"default": "relative"
+		},
+		"borderRadius": {
+			"type": "object",
+			"default": {
+				"top": "0px",
+				"right": "0px",
+				"bottom": "0px",
+				"left": "0px"
+			}
+		},
+		"padding": {
+			"type": "object",
+			"default": {
+				"top": "0px",
+				"right": "0px",
+				"bottom": "0px",
+				"left": "0px"
+			}
+		},
+		"margin": {
+			"type": "object",
+			"default": {
+				"top": "0px",
+				"right": "0px",
+				"bottom": "0px",
+				"left": "0px"
+			}
+		},
+		"borderWidth": {
+			"type": "string",
+			"default": "0px"
+		},
+		"borderColor": {
+			"type": "string",
+			"default": "#000000"
+		},
+		"borderStyle": {
+			"type": "string",
+			"default": "solid"
+		},
+		"boxShadow": {
+			"type": "string",
+			"default": "none"
+		}
+	}
+}
