@@ -2,7 +2,6 @@
     display: flex;
     align-items: center;
     overflow: hidden;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
     width: 100%;
     box-sizing: border-box;
 }
@@ -332,7 +331,7 @@
 @media (max-width: 782px) {
     .wm-newsticker-label {
         padding: 0 10px;
-        font-size: 12px !important;
+        font-size: 12px;
     }
 
     .wm-newsticker-separator {
@@ -340,16 +339,16 @@
     }
 
     .wm-newsticker-slides {
-        padding: 0 10px !important;
+        padding: 0 10px;
     }
 
     .wm-newsticker-controls {
-        padding: 0 5px !important;
-        gap: 2px !important;
+        padding: 0 5px;
+        gap: 2px;
     }
 
     .wm-control-btn {
-        padding: 4px !important;
+        padding: 4px;
     }
 }
 
@@ -431,4 +430,30 @@
 @keyframes wm-progress-fill {
     0% { width: 0; }
     100% { width: 100%; }
+}
+
+// =============================================
+// REDUCED MOTION SUPPORT (Accessibility)
+// =============================================
+@media (prefers-reduced-motion: reduce) {
+    .wm-newsticker-wrapper {
+        .wm-newsticker-track {
+            animation: none;
+            padding-left: 15px;
+        }
+
+        .wm-newsticker-slide {
+            transition: none;
+
+            &.active {
+                animation: none;
+                border-right: none;
+            }
+        }
+
+        .wm-newsticker-progress-bar {
+            animation: none;
+            width: 100%;
+        }
+    }
 }

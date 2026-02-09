@@ -1,9 +1,8 @@
 import { registerBlockType } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
-import { 
+import {
     InspectorControls,
     useBlockProps,
-    PanelColorSettings,
 } from '@wordpress/block-editor';
 import { 
     PanelBody, 
@@ -457,7 +456,7 @@ registerBlockType('wm/newsticker', {
                             value={labelText}
                             onChange={(value) => setAttributes({ labelText: value })}
                             placeholder={defaultLabelText}
-                            help={__('Leave empty to hide the label', 'wm-newsticker')}
+                            help={__('Leave empty to hide the label on the frontend', 'wm-newsticker')}
                         />
                         {animationType === 'scroll' && (
                             <TextControl
@@ -781,7 +780,7 @@ registerBlockType('wm/newsticker', {
                     <PanelBody title={__('About', 'wm-newsticker')} initialOpen={false}>
                         <div className="wm-newsticker-credits">
                             <p><strong>WM Newsticker</strong></p>
-                            <p className="wm-newsticker-version">Version 1.4.4</p>
+                            <p className="wm-newsticker-version">Version 1.4.6</p>
                         </div>
                     </PanelBody>
                 </InspectorControls>
