@@ -1,0 +1,46 @@
+# WM Newsticker
+
+> A lightweight Gutenberg block for creating animated news tickers in WordPress. Supports scroll, fade, slide, and typing animations.
+
+## Tech Stack
+
+- PHP 7.4+ (WordPress Plugin)
+- JavaScript (Gutenberg Block + Frontend)
+- SCSS (Editor + Frontend styles)
+- @wordpress/scripts (Build tooling)
+
+## Features
+
+- 4 animation styles: Scroll (Marquee), Fade, Slide, Typing
+- Manual announcements or dynamic content from WordPress posts
+- Category/tag filtering and custom post type support
+- Optional user controls (play/pause, prev/next, progress bar)
+- RTL language support
+- Multilingual (EN, DE, ES)
+- No jQuery dependency
+
+## Project Structure
+
+- `wm-newsticker.php` — Main plugin file (v1.4.6)
+- `block.json` — Block registration
+- `src/index.js` — Block editor component
+- `src/frontend.js` — Frontend animation script
+- `src/editor.scss` — Editor styles
+- `src/style.scss` — Frontend styles
+- `build/` — Compiled output
+- `languages/` — Translation files (DE, ES)
+
+## Commands
+
+- `npm run build` — Build for production
+- `npm run start` — Development with watch mode
+
+## Requirements
+
+- WordPress 5.8+
+- PHP 7.4+
+- Gutenberg editor enabled
+
+## License
+
+GPL v2 or later

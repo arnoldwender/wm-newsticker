@@ -5,7 +5,7 @@ A lightweight Gutenberg block for creating animated news tickers in WordPress.
 ![WordPress](https://img.shields.io/badge/WordPress-5.8%2B-blue?logo=wordpress)
 ![PHP](https://img.shields.io/badge/PHP-7.4%2B-777BB4?logo=php)
 ![License](https://img.shields.io/badge/License-GPL%20v2-green)
-![Version](https://img.shields.io/badge/Version-1.4.4-orange)
+![Version](https://img.shields.io/badge/Version-1.4.6-orange)
 
 ## Features
 
@@ -86,6 +86,7 @@ wm-newsticker/
 ├── languages/          # Translation files (DE, ES)
 ├── src/
 │   ├── index.js        # Block editor component
+│   ├── frontend.js     # Frontend animation script
 │   ├── editor.scss     # Editor styles
 │   └── style.scss      # Frontend styles
 ├── package.json
@@ -100,6 +101,9 @@ wm-newsticker/
 - Gutenberg editor enabled
 
 ## Changelog
+
+### 1.4.6
+- Version bump with dependency updates
 
 ### 1.4.4
 - Cleaned up code for WordPress.org submission
