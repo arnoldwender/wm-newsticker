@@ -293,6 +293,14 @@ final class WM_Newsticker {
 		$items = array();
 
 		$post_type   = isset( $attributes['postType'] ) ? sanitize_key( $attributes['postType'] ) : 'post';
+
+		// Validate post type is registered and publicly accessible to prevent
+		// unauthorized access to non-public post type content via crafted attributes.
+		$post_type_object = get_post_type_object( $post_type );
+		if ( ! $post_type_object || ! $post_type_object->public ) {
+			$post_type = 'post';
+		}
+
 		$posts_count = $this->sanitize_number_range(
 			isset( $attributes['postsCount'] ) ? $attributes['postsCount'] : 5,
 			1, 20, 5
