@@ -271,13 +271,13 @@ registerBlockType('wm/newsticker', {
 
             setIsLoading(true);
             
-            let path = `/wp/v2/${postType}?per_page=${postsCount}&orderby=${orderBy}&order=${order.toLowerCase()}`;
-            
+            let path = `/wp/v2/${encodeURIComponent(postType)}?per_page=${parseInt(postsCount, 10)}&orderby=${encodeURIComponent(orderBy)}&order=${encodeURIComponent(order.toLowerCase())}`;
+
             if (categoryIds.length > 0 && postType === 'post') {
-                path += `&categories=${categoryIds.join(',')}`;
+                path += `&categories=${categoryIds.map(id => parseInt(id, 10)).join(',')}`;
             }
             if (tagIds.length > 0 && postType === 'post') {
-                path += `&tags=${tagIds.join(',')}`;
+                path += `&tags=${tagIds.map(id => parseInt(id, 10)).join(',')}`;
             }
 
             apiFetch({ path })
