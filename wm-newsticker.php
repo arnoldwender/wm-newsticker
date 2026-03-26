@@ -25,9 +25,15 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 // Define plugin constants.
-define( 'WM_NEWSTICKER_VERSION', '1.4.6' );
-define( 'WM_NEWSTICKER_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
-define( 'WM_NEWSTICKER_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+if ( ! defined( 'WM_NEWSTICKER_VERSION' ) ) {
+	define( 'WM_NEWSTICKER_VERSION', '1.4.6' );
+}
+if ( ! defined( 'WM_NEWSTICKER_PLUGIN_DIR' ) ) {
+	define( 'WM_NEWSTICKER_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+}
+if ( ! defined( 'WM_NEWSTICKER_PLUGIN_URL' ) ) {
+	define( 'WM_NEWSTICKER_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+}
 
 /**
  * Main plugin class.
@@ -53,6 +59,20 @@ final class WM_Newsticker {
 			self::$instance = new self();
 		}
 		return self::$instance;
+	}
+
+	/**
+	 * Prevent cloning of the singleton.
+	 */
+	private function __clone() {}
+
+	/**
+	 * Prevent unserializing of the singleton.
+	 *
+	 * @throws \Exception Always.
+	 */
+	public function __wakeup() {
+		throw new \Exception( 'Cannot unserialize singleton.' );
 	}
 
 	/**
@@ -134,8 +154,14 @@ final class WM_Newsticker {
 			return '';
 		}
 
-		// Valid hex color.
-		if ( preg_match( '/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/', $color ) ) {
+		// Named safe CSS colors.
+		$named_colors = array( 'transparent', 'inherit', 'currentcolor' );
+		if ( in_array( strtolower( $color ), $named_colors, true ) ) {
+			return strtolower( $color );
+		}
+
+		// Valid hex color (3, 4, 6, or 8 digits).
+		if ( preg_match( '/^#([A-Fa-f0-9]{3,4}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$/', $color ) ) {
 			return $color;
 		}
 
@@ -376,10 +402,10 @@ final class WM_Newsticker {
 	 */
 	private function format_post_date( $timestamp, $format ) {
 		if ( 'relative' === $format ) {
-			return human_time_diff( $timestamp, time() ) . ' ' . __( 'ago', 'wm-newsticker' );
+			return human_time_diff( $timestamp, current_time( 'timestamp' ) ) . ' ' . __( 'ago', 'wm-newsticker' );
 		}
 
-		return date_i18n( get_option( 'date_format' ), $timestamp );
+		return wp_date( get_option( 'date_format' ), $timestamp );
 	}
 
 	/**
@@ -547,7 +573,7 @@ final class WM_Newsticker {
 					</div>
 				<?php endif; ?>
 				<?php if ( 'scroll' === $animation_type ) : ?>
-					<div class="wm-newsticker-track<?php echo $should_duplicate ? '' : ' wm-newsticker-no-duplicate'; ?>" style="animation-duration: <?php echo esc_attr( $animation_duration ); ?>s;">
+					<div class="<?php echo esc_attr( 'wm-newsticker-track' . ( $should_duplicate ? '' : ' wm-newsticker-no-duplicate' ) ); ?>" style="animation-duration: <?php echo esc_attr( $animation_duration ); ?>s;">
 						<?php
 						$this->render_items( $items, $separator, $text_color, $font_size, true );
 
@@ -559,7 +585,7 @@ final class WM_Newsticker {
 				<?php else : ?>
 					<div class="wm-newsticker-slides" data-current="0">
 						<?php foreach ( $items as $index => $item ) : ?>
-							<div class="wm-newsticker-slide<?php echo 0 === $index ? ' active' : ''; ?>"
+							<div class="<?php echo esc_attr( 'wm-newsticker-slide' . ( 0 === $index ? ' active' : '' ) ); ?>"
 								style="color: <?php echo esc_attr( $text_color ); ?>; font-size: <?php echo esc_attr( $font_size ); ?>px;"
 								data-index="<?php echo esc_attr( $index ); ?>">
 								<?php if ( ! empty( $item['link'] ) ) : ?>
