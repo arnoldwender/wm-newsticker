@@ -75,9 +75,17 @@ A Gutenberg block for creating animated news tickers. Supports multiple animatio
 
 = Security =
 
-* All inputs properly sanitized and escaped
-* No database queries (uses WordPress APIs)
-* Follows WordPress coding standards
+* All output escaped with esc_html(), esc_attr(), esc_url()
+* All input sanitized with sanitize_text_field(), sanitize_key(), absint()
+* Color values validated with strict anchored regex patterns
+* Enum attributes validated with allowlists (strict in_array)
+* Numeric attributes clamped within safe min/max ranges
+* REST API endpoints protected with permission_callback
+* Post type queries restricted to registered public types
+* Block attributes constrained with JSON Schema (enum, minimum, maximum)
+* Singleton pattern hardened against cloning and unserialization
+* No innerHTML or eval() usage in frontend JavaScript
+* Follows WordPress coding standards (WPCS)
 * Regular security audits
 
 == Installation ==
@@ -143,6 +151,27 @@ Yes, when using posts as the content source, you can filter by a specific catego
 9. Mobile responsive design
 
 == Changelog ==
+
+= 1.4.7 =
+* Security: Fixed CSS injection via incomplete regex in color sanitization
+* Security: Fixed path traversal in REST API path construction
+* Security: Added public post type validation to prevent unauthorized content exposure
+* Security: Hardened singleton pattern with __clone()/__wakeup() protection
+* Security: Added defined() guards on plugin constants
+* Security: Added field allowlist in editor to prevent prototype pollution
+* Security: Added AbortController to prevent race conditions on API fetches
+* Accessibility: ARIA labels now update dynamically on play/pause toggle
+* Accessibility: prefers-reduced-motion now respected for JS-driven animations
+* Fix: Hover no longer overrides manual pause state
+* Fix: Play/pause icons now update correctly on hover in scroll ticker
+* Fix: Timezone consistency using wp_date() and current_time()
+* Fix: HTML entities in post titles now decoded correctly in editor preview
+* Fix: Editor font size and height ranges now match server-side limits
+* Hardening: Added enum constraints on all string-enum attributes in block.json
+* Hardening: Added minimum/maximum on numeric attributes in block.json
+* Hardening: Added items/properties schemas on array/object attributes in block.json
+* Hardening: All dynamic class attributes now use esc_attr() (WPCS compliance)
+* Hardening: Support for 4/8-digit hex colors and named colors (transparent, inherit)
 
 = 1.4.6 =
 * Added block.json metadata file for modern block registration
