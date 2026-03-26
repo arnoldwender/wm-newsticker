@@ -44,6 +44,29 @@ We take security seriously. If you discover a security vulnerability, please rep
 
 ## Security Measures
 
+### Input Validation & Output Escaping
+- All user-facing output escaped with `esc_html()`, `esc_attr()`, `esc_url()`
+- All input sanitized with `sanitize_text_field()`, `sanitize_key()`, `absint()`
+- Color values validated with strict anchored regex patterns (hex, rgb/rgba, CSS variables)
+- Named CSS colors restricted to a safe allowlist (`transparent`, `inherit`, `currentcolor`)
+- Enum-type attributes validated against explicit allowlists using strict `in_array()`
+- Numeric attributes clamped within defined min/max ranges
+- Block attribute schemas enforce type, enum, and range constraints at the JSON Schema level
+
+### Access Control
+- REST API endpoints protected with `permission_callback` capability checks
+- Post type queries restricted to registered, public post types only
+- Singleton pattern hardened against cloning (`__clone()`) and unserialization (`__wakeup()`)
+
+### Frontend Security
+- No `innerHTML`, `document.write`, or `eval()` usage
+- All DOM interactions use safe APIs (`querySelector`, `classList`, `style`)
+- Dataset values parsed and clamped before use
+- Editor uses `addQueryArgs` for safe URL construction
+- API requests use `AbortController` to prevent race conditions
+- HTML entities properly decoded via `@wordpress/html-entities`
+
+### General
 - HTTPS enforced via hosting provider
 - Security headers configured (X-Frame-Options, X-Content-Type-Options, Referrer-Policy)
 - No third-party tracking or analytics

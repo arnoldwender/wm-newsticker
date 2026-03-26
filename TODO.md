@@ -6,8 +6,8 @@
 - [ ] Add color contrast beyond color alone (icons, patterns)
 - [ ] Ensure all images have descriptive alt text
 - [ ] Implement full keyboard navigation support
-- [ ] Add screen reader ARIA landmarks and labels
-- [ ] Implement prefers-reduced-motion support
+- [x] Add screen reader ARIA landmarks and labels
+- [x] Implement prefers-reduced-motion support
 - [ ] Add skip links for keyboard users
 
 ## Typography & Visual Design

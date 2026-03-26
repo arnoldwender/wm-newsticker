@@ -24,6 +24,19 @@
 	}
 
 	/**
+	 * Update ARIA label on play/pause button.
+	 *
+	 * @param {HTMLElement} btn     The play/pause button.
+	 * @param {boolean}     playing Whether currently playing.
+	 */
+	function updateAriaState( btn, playing ) {
+		if ( btn ) {
+			btn.setAttribute( 'aria-label', playing ? 'Pause' : 'Play' );
+			btn.setAttribute( 'data-playing', playing ? 'true' : 'false' );
+		}
+	}
+
+	/**
 	 * Initialize a scroll-type ticker.
 	 *
 	 * @param {HTMLElement} wrapper     The ticker wrapper element.
@@ -36,8 +49,25 @@
 		}
 
 		var playing = true;
+		var manuallyPaused = false;
 		var prog = wrapper.querySelector( '.wm-newsticker-progress-bar' );
 		var pauseOnHover = wrapper.dataset.pauseOnHover === 'true';
+		var playPauseBtn = null;
+		var iconPause = null;
+		var iconPlay = null;
+
+		/**
+		 * Update the play/pause icon visibility.
+		 */
+		function updateIcons() {
+			if ( iconPause ) {
+				iconPause.style.display = playing ? 'block' : 'none';
+			}
+			if ( iconPlay ) {
+				iconPlay.style.display = playing ? 'none' : 'block';
+			}
+			updateAriaState( playPauseBtn, playing );
+		}
 
 		/**
 		 * Pause the scroll animation.
@@ -48,6 +78,7 @@
 				prog.style.animationPlayState = 'paused';
 			}
 			playing = false;
+			updateIcons();
 		}
 
 		/**
@@ -59,39 +90,27 @@
 				prog.style.animationPlayState = 'running';
 			}
 			playing = true;
+			updateIcons();
 		}
 
 		if ( hasControls ) {
-			var playPauseBtn = wrapper.querySelector(
-				'.wm-control-play-pause'
-			);
-			var iconPause = playPauseBtn
+			playPauseBtn = wrapper.querySelector( '.wm-control-play-pause' );
+			iconPause = playPauseBtn
 				? playPauseBtn.querySelector( '.wm-icon-pause' )
 				: null;
-			var iconPlay = playPauseBtn
+			iconPlay = playPauseBtn
 				? playPauseBtn.querySelector( '.wm-icon-play' )
 				: null;
-
-			/**
-			 * Update the play/pause icon visibility.
-			 */
-			function updateIcons() {
-				if ( iconPause ) {
-					iconPause.style.display = playing ? 'block' : 'none';
-				}
-				if ( iconPlay ) {
-					iconPlay.style.display = playing ? 'none' : 'block';
-				}
-			}
 
 			if ( playPauseBtn ) {
 				playPauseBtn.addEventListener( 'click', function () {
 					if ( playing ) {
 						pause();
+						manuallyPaused = true;
 					} else {
 						play();
+						manuallyPaused = false;
 					}
-					updateIcons();
 				} );
 			}
 		}
@@ -100,15 +119,11 @@
 			wrapper.addEventListener( 'mouseenter', function () {
 				if ( playing ) {
 					pause();
-					if ( hasControls && typeof updateIcons === 'function' ) {
-						// Icons are updated through closure.
-					}
 				}
 			} );
 			wrapper.addEventListener( 'mouseleave', function () {
-				play();
-				if ( hasControls && typeof updateIcons === 'function' ) {
-					// Icons are updated through closure.
+				if ( ! manuallyPaused ) {
+					play();
 				}
 			} );
 		}
@@ -117,15 +132,22 @@
 	/**
 	 * Initialize a slide-type ticker (fade, slide, typing).
 	 *
-	 * @param {HTMLElement} wrapper     The ticker wrapper element.
-	 * @param {boolean}     hasControls Whether the ticker has controls.
-	 * @param {number}      duration    Duration per slide in milliseconds.
-	 * @param {number}      total       Total number of slides.
+	 * @param {HTMLElement} wrapper       The ticker wrapper element.
+	 * @param {boolean}     hasControls   Whether the ticker has controls.
+	 * @param {number}      duration      Duration per slide in milliseconds.
+	 * @param {boolean}     reducedMotion Whether the user prefers reduced motion.
 	 */
-	function initSlideTicker( wrapper, hasControls, duration, total ) {
+	function initSlideTicker( wrapper, hasControls, duration, reducedMotion ) {
 		var slides = wrapper.querySelectorAll( '.wm-newsticker-slide' );
+		var total = slides.length;
+
+		if ( total < 2 ) {
+			return;
+		}
+
 		var current = 0;
-		var paused = false;
+		var paused = reducedMotion;
+		var manuallyPaused = false;
 		var prog = wrapper.querySelector( '.wm-newsticker-progress-bar' );
 		var pauseOnHover = wrapper.dataset.pauseOnHover === 'true';
 
@@ -146,7 +168,7 @@
 
 			if ( prog ) {
 				prog.style.animation = 'none';
-				prog.offsetHeight; // Trigger reflow.
+				void prog.offsetHeight;
 				prog.style.animation = '';
 			}
 		}
@@ -176,103 +198,112 @@
 			}
 		}
 
-		if ( total > 1 ) {
-			setInterval( tick, duration );
+		setInterval( tick, duration );
 
-			if ( hasControls ) {
-				var playPauseBtn = wrapper.querySelector(
-					'.wm-control-play-pause'
-				);
-				var prevBtn = wrapper.querySelector( '.wm-control-prev' );
-				var nextBtn = wrapper.querySelector( '.wm-control-next' );
-				var iconPause = playPauseBtn
-					? playPauseBtn.querySelector( '.wm-icon-pause' )
-					: null;
-				var iconPlay = playPauseBtn
-					? playPauseBtn.querySelector( '.wm-icon-play' )
-					: null;
+		if ( hasControls ) {
+			var playPauseBtn = wrapper.querySelector(
+				'.wm-control-play-pause'
+			);
+			var prevBtn = wrapper.querySelector( '.wm-control-prev' );
+			var nextBtn = wrapper.querySelector( '.wm-control-next' );
+			var iconPause = playPauseBtn
+				? playPauseBtn.querySelector( '.wm-icon-pause' )
+				: null;
+			var iconPlay = playPauseBtn
+				? playPauseBtn.querySelector( '.wm-icon-play' )
+				: null;
 
-				/**
-				 * Pause the slide rotation.
-				 */
-				function pauseSlides() {
-					paused = true;
-					if ( iconPause ) {
-						iconPause.style.display = 'none';
-					}
-					if ( iconPlay ) {
-						iconPlay.style.display = 'block';
-					}
-					if ( prog ) {
-						prog.style.animationPlayState = 'paused';
-					}
+			/**
+			 * Update icon visibility and ARIA state.
+			 */
+			function updateIcons() {
+				if ( iconPause ) {
+					iconPause.style.display = paused ? 'none' : 'block';
 				}
+				if ( iconPlay ) {
+					iconPlay.style.display = paused ? 'block' : 'none';
+				}
+				updateAriaState( playPauseBtn, ! paused );
+			}
 
-				/**
-				 * Resume the slide rotation.
-				 */
-				function playSlides() {
-					paused = false;
-					if ( iconPause ) {
-						iconPause.style.display = 'block';
-					}
-					if ( iconPlay ) {
-						iconPlay.style.display = 'none';
-					}
-					if ( prog ) {
-						prog.style.animationPlayState = 'running';
-					}
+			/**
+			 * Pause the slide rotation.
+			 */
+			function pauseSlides() {
+				paused = true;
+				if ( prog ) {
+					prog.style.animationPlayState = 'paused';
 				}
+				updateIcons();
+			}
 
-				if ( playPauseBtn ) {
-					playPauseBtn.addEventListener( 'click', function () {
-						if ( paused ) {
-							playSlides();
-						} else {
-							pauseSlides();
-						}
-					} );
+			/**
+			 * Resume the slide rotation.
+			 */
+			function playSlides() {
+				paused = false;
+				if ( prog ) {
+					prog.style.animationPlayState = 'running';
 				}
-				if ( prevBtn ) {
-					prevBtn.addEventListener( 'click', function () {
-						prev();
-					} );
-				}
-				if ( nextBtn ) {
-					nextBtn.addEventListener( 'click', function () {
-						next();
-					} );
-				}
+				updateIcons();
+			}
 
-				if ( pauseOnHover ) {
-					wrapper.addEventListener( 'mouseenter', function () {
-						pauseSlides();
-					} );
-					wrapper.addEventListener( 'mouseleave', function () {
+			if ( playPauseBtn ) {
+				playPauseBtn.addEventListener( 'click', function () {
+					if ( paused ) {
 						playSlides();
-					} );
-				}
-			} else if ( pauseOnHover ) {
-				wrapper.addEventListener( 'mouseenter', function () {
-					paused = true;
-				} );
-				wrapper.addEventListener( 'mouseleave', function () {
-					paused = false;
+						manuallyPaused = false;
+					} else {
+						pauseSlides();
+						manuallyPaused = true;
+					}
 				} );
 			}
+			if ( prevBtn ) {
+				prevBtn.addEventListener( 'click', function () {
+					prev();
+				} );
+			}
+			if ( nextBtn ) {
+				nextBtn.addEventListener( 'click', function () {
+					next();
+				} );
+			}
+
+			if ( pauseOnHover ) {
+				wrapper.addEventListener( 'mouseenter', function () {
+					if ( ! paused ) {
+						pauseSlides();
+					}
+				} );
+				wrapper.addEventListener( 'mouseleave', function () {
+					if ( ! manuallyPaused ) {
+						playSlides();
+					}
+				} );
+			}
+		} else if ( pauseOnHover ) {
+			wrapper.addEventListener( 'mouseenter', function () {
+				paused = true;
+			} );
+			wrapper.addEventListener( 'mouseleave', function () {
+				if ( ! manuallyPaused ) {
+					paused = false;
+				}
+			} );
 		}
 	}
 
 	/**
 	 * Initialize a single ticker instance.
 	 *
-	 * @param {HTMLElement} wrapper The ticker wrapper element.
+	 * @param {HTMLElement} wrapper       The ticker wrapper element.
+	 * @param {boolean}     reducedMotion Whether user prefers reduced motion.
 	 */
-	function initTicker( wrapper ) {
+	function initTicker( wrapper, reducedMotion ) {
 		var animationType = wrapper.dataset.animation || 'scroll';
 		var hasControls = wrapper.dataset.hasControls === 'true';
-		var speed = parseFloat( wrapper.dataset.speed ) || 5;
-		var itemCount = parseInt( wrapper.dataset.items, 10 ) || 1;
+		var speed = Math.max( 1, parseFloat( wrapper.dataset.speed ) || 5 );
 
 		if ( animationType === 'scroll' ) {
 			initScrollTicker( wrapper, hasControls );
@@ -281,7 +312,7 @@
 				wrapper,
 				hasControls,
 				speed * 1000,
-				itemCount
+				reducedMotion
 			);
 		}
 	}
@@ -290,6 +321,7 @@
 	 * Initialize all tickers on the page.
 	 */
 	function initAllTickers() {
+		var reducedMotion = prefersReducedMotion();
 		var tickers = document.querySelectorAll( '.wm-newsticker-wrapper' );
 		tickers.forEach( function ( ticker ) {
 			// Skip already initialized tickers.
@@ -299,20 +331,20 @@
 			ticker.dataset.initialized = 'true';
 
 			// If user prefers reduced motion, pause all CSS animations.
-			if ( prefersReducedMotion() ) {
+			if ( reducedMotion ) {
 				var track = ticker.querySelector( '.wm-newsticker-track' );
 				if ( track ) {
 					track.style.animationPlayState = 'paused';
 				}
 			}
 
-			initTicker( ticker );
+			initTicker( ticker, reducedMotion );
 		} );
 	}
 
 	// Initialize when DOM is ready.
 	if ( document.readyState === 'loading' ) {
-		document.addEventListener( 'DOMContentLoaded', initAllTickers );
+		document.addEventListener( 'DOMContentLoaded', initAllTickers, { once: true } );
 	} else {
 		initAllTickers();
 	}
