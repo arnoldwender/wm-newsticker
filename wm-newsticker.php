@@ -140,12 +140,12 @@ final class WM_Newsticker {
 		}
 
 		// RGB/RGBA color.
-		if ( preg_match( '/^rgba?\s*\(\s*\d+\s*,\s*\d+\s*,\s*\d+/', $color ) ) {
+		if ( preg_match( '/^rgba?\s*\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*(,\s*(0|1|0?\.\d+))?\s*\)$/', $color ) ) {
 			return $color;
 		}
 
 		// CSS variable (theme colors).
-		if ( preg_match( '/^var\s*\(\s*--[a-zA-Z0-9_-]+/', $color ) ) {
+		if ( preg_match( '/^var\s*\(\s*--[a-zA-Z0-9_-]+\s*\)$/', $color ) ) {
 			return $color;
 		}
 
