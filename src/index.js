@@ -21,8 +21,10 @@ import {
     __experimentalBoxControl as BoxControl,
     __experimentalUnitControl as UnitControl,
 } from '@wordpress/components';
-import { useState, useEffect } from '@wordpress/element';
+import { useState, useEffect, useRef } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
+import { addQueryArgs } from '@wordpress/url';
+import { decodeEntities } from '@wordpress/html-entities';
 
 import './editor.scss';
 import './style.scss';
@@ -270,29 +272,44 @@ registerBlockType('wm/newsticker', {
             }
 
             setIsLoading(true);
-            
-            let path = `/wp/v2/${postType}?per_page=${postsCount}&orderby=${orderBy}&order=${order.toLowerCase()}`;
-            
-            if (categoryIds.length > 0 && postType === 'post') {
-                path += `&categories=${categoryIds.join(',')}`;
+
+            const controller = new AbortController();
+
+            const validPostType = postTypes.find(pt => pt.value === postType) ? postType : 'post';
+            const clampedCount = Math.min(20, Math.max(1, parseInt(postsCount, 10) || 5));
+
+            const queryArgs = {
+                per_page: clampedCount,
+                orderby: orderBy,
+                order: order.toLowerCase(),
+            };
+
+            if (categoryIds.length > 0 && validPostType === 'post') {
+                queryArgs.categories = categoryIds.map(id => parseInt(id, 10)).join(',');
             }
-            if (tagIds.length > 0 && postType === 'post') {
-                path += `&tags=${tagIds.join(',')}`;
+            if (tagIds.length > 0 && validPostType === 'post') {
+                queryArgs.tags = tagIds.map(id => parseInt(id, 10)).join(',');
             }
 
-            apiFetch({ path })
+            const path = addQueryArgs(`/wp/v2/${encodeURIComponent(validPostType)}`, queryArgs);
+
+            apiFetch({ path, signal: controller.signal })
                 .then((data) => {
                     setPreviewPosts(data.map(post => ({
-                        text: post.title.rendered,
+                        text: decodeEntities(post.title.rendered),
                         link: post.link,
                     })));
                     setIsLoading(false);
                 })
-                .catch(() => {
-                    setPreviewPosts([]);
-                    setIsLoading(false);
+                .catch((err) => {
+                    if (err.name !== 'AbortError') {
+                        setPreviewPosts([]);
+                        setIsLoading(false);
+                    }
                 });
-        }, [contentSource, postType, postsCount, categoryIds, tagIds, orderBy, order]);
+
+            return () => controller.abort();
+        }, [contentSource, postType, postTypes, postsCount, categoryIds, tagIds, orderBy, order]);
 
         const defaultLabelText = __('NEWS', 'wm-newsticker');
 
@@ -311,6 +328,8 @@ registerBlockType('wm/newsticker', {
         };
 
         const updateItem = (index, field, value) => {
+            const allowedFields = ['text', 'link', 'newTab'];
+            if (!allowedFields.includes(field)) return;
             const newItems = items.map((item, i) => {
                 if (i === index) {
                     return { ...item, [field]: value };
@@ -320,8 +339,8 @@ registerBlockType('wm/newsticker', {
             setAttributes({ items: newItems });
         };
 
-        const moveItem = (index, direction) => {
-            const newIndex = index + direction;
+        const moveItem = (index, delta) => {
+            const newIndex = index + delta;
             if (newIndex < 0 || newIndex >= items.length) return;
             
             const newItems = [...items];
@@ -470,14 +489,14 @@ registerBlockType('wm/newsticker', {
                             value={fontSize}
                             onChange={(value) => setAttributes({ fontSize: value })}
                             min={10}
-                            max={24}
+                            max={72}
                         />
                         <RangeControl
                             label={__('Height (px)', 'wm-newsticker')}
                             value={height}
                             onChange={(value) => setAttributes({ height: value })}
-                            min={30}
-                            max={80}
+                            min={20}
+                            max={200}
                         />
                     </PanelBody>
 
@@ -793,14 +812,13 @@ registerBlockType('wm/newsticker', {
                             height: `${height}px`
                         }}
                     >
-                        {(labelText || labelText === '') && (
-                            <div 
+                        {labelText && (
+                            <div
                                 className="wm-newsticker-label"
-                                style={{ 
+                                style={{
                                     backgroundColor: labelBackgroundColor,
                                     color: labelTextColor,
                                     fontSize: `${fontSize}px`,
-                                    display: labelText === '' ? 'none' : 'flex'
                                 }}
                             >
                                 {displayLabel}
