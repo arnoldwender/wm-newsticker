@@ -20,11 +20,21 @@
 	"attributes": {
 		"items": {
 			"type": "array",
-			"default": []
+			"default": [],
+			"items": {
+				"type": "object",
+				"properties": {
+					"text": { "type": "string" },
+					"link": { "type": "string" },
+					"newTab": { "type": "boolean" }
+				}
+			}
 		},
 		"speed": {
 			"type": "number",
-			"default": 50
+			"default": 50,
+			"minimum": 10,
+			"maximum": 100
 		},
 		"pauseOnHover": {
 			"type": "boolean",
@@ -52,23 +62,29 @@
 		},
 		"separator": {
 			"type": "string",
-			"default": "•"
+			"default": "\u2022"
 		},
 		"fontSize": {
 			"type": "number",
-			"default": 14
+			"default": 14,
+			"minimum": 10,
+			"maximum": 72
 		},
 		"height": {
 			"type": "number",
-			"default": 45
+			"default": 45,
+			"minimum": 20,
+			"maximum": 200
 		},
 		"animationType": {
 			"type": "string",
-			"default": "scroll"
+			"default": "scroll",
+			"enum": [ "scroll", "fade", "slide", "typing" ]
 		},
 		"direction": {
 			"type": "string",
-			"default": "left"
+			"default": "left",
+			"enum": [ "left", "right", "up", "down" ]
 		},
 		"isRTL": {
 			"type": "boolean",
@@ -92,11 +108,13 @@
 		},
 		"controlsPosition": {
 			"type": "string",
-			"default": "right"
+			"default": "right",
+			"enum": [ "left", "right" ]
 		},
 		"contentSource": {
 			"type": "string",
-			"default": "manual"
+			"default": "manual",
+			"enum": [ "manual", "posts" ]
 		},
 		"postType": {
 			"type": "string",
@@ -104,23 +122,33 @@
 		},
 		"postsCount": {
 			"type": "number",
-			"default": 5
+			"default": 5,
+			"minimum": 1,
+			"maximum": 20
 		},
 		"categoryIds": {
 			"type": "array",
-			"default": []
+			"default": [],
+			"items": {
+				"type": "integer"
+			}
 		},
 		"tagIds": {
 			"type": "array",
-			"default": []
+			"default": [],
+			"items": {
+				"type": "integer"
+			}
 		},
 		"orderBy": {
 			"type": "string",
-			"default": "date"
+			"default": "date",
+			"enum": [ "date", "title", "modified", "rand", "comment_count" ]
 		},
 		"order": {
 			"type": "string",
-			"default": "DESC"
+			"default": "DESC",
+			"enum": [ "DESC", "ASC" ]
 		},
 		"showDate": {
 			"type": "boolean",
@@ -128,7 +156,8 @@
 		},
 		"dateFormat": {
 			"type": "string",
-			"default": "relative"
+			"default": "relative",
+			"enum": [ "relative", "absolute" ]
 		},
 		"borderRadius": {
 			"type": "object",
@@ -137,6 +166,12 @@
 				"right": "0px",
 				"bottom": "0px",
 				"left": "0px"
+			},
+			"properties": {
+				"top": { "type": "string" },
+				"right": { "type": "string" },
+				"bottom": { "type": "string" },
+				"left": { "type": "string" }
 			}
 		},
 		"padding": {
@@ -146,6 +181,12 @@
 				"right": "0px",
 				"bottom": "0px",
 				"left": "0px"
+			},
+			"properties": {
+				"top": { "type": "string" },
+				"right": { "type": "string" },
+				"bottom": { "type": "string" },
+				"left": { "type": "string" }
 			}
 		},
 		"margin": {
@@ -155,6 +196,12 @@
 				"right": "0px",
 				"bottom": "0px",
 				"left": "0px"
+			},
+			"properties": {
+				"top": { "type": "string" },
+				"right": { "type": "string" },
+				"bottom": { "type": "string" },
+				"left": { "type": "string" }
 			}
 		},
 		"borderWidth": {
@@ -167,7 +214,8 @@
 		},
 		"borderStyle": {
 			"type": "string",
-			"default": "solid"
+			"default": "solid",
+			"enum": [ "solid", "dashed", "dotted", "none" ]
 		},
 		"boxShadow": {
 			"type": "string",
