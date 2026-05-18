@@ -43,4 +43,8 @@
 
 ## License
 
-GPL v2 or later
+Proprietary — All Rights Reserved · Wender Media
+
+## Sprint 2026-05-18
+
+- License updated from GPL-2.0 to proprietary (HARD RULE compliance)
